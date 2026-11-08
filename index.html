@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Forty-three staged maps of the path to awakening, East and West, religious to secular, side by side on one scale, with each tradition’s own terms.">
+<title>Ladders of Awakening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Marcellus&display=swap">
+<style>
+/* Layout: a bottom-up chart; band rows shade from cave-shadow at the bottom to sunlight at the top,
+   one column per map, sticky axis on the left and sticky headers on top. */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+:root {
+  --bg: #eef1f4;
+  --surface: #fbfcfd;
+  --surface-2: #f5f7f9;
+  --ink: #1b2230;
+  --muted: #5a6474;
+  --line: #d3d9e1;
+  --line-strong: #a9b3c1;
+  --low: #c9d0da;
+  --high: #f6e4ab;
+  --sun: #b07f12;
+  --k-rel: #9a3f2c;
+  --k-mys: #6b4aa0;
+  --k-phil: #2c5f8f;
+  --k-psy: #2f7a55;
+  --tip-bg: #1b2230;
+  --tip-ink: #eef1f4;
+  --tip-muted: #aab4c3;
+  --display: "Marcellus", "Trajan Pro", Georgia, serif;
+  --body: "Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
+  --axis: 112px;
+  --col: 128px;
+  --row: 66px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1016; --surface: #1a2029; --surface-2: #141920; --ink: #e6e9ee; --muted: #9aa4b3;
+    --line: #2a313d; --line-strong: #4a5464; --low: #0f131a; --high: #3d3420; --sun: #e2b24c;
+    --k-rel: #e58d76; --k-mys: #b59de8; --k-phil: #82b4e8; --k-psy: #7dcaa2;
+    --tip-bg: #e6e9ee; --tip-ink: #141920; --tip-muted: #4f5a6a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1016; --surface: #1a2029; --surface-2: #141920; --ink: #e6e9ee; --muted: #9aa4b3;
+  --line: #2a313d; --line-strong: #4a5464; --low: #0f131a; --high: #3d3420; --sun: #e2b24c;
+  --k-rel: #e58d76; --k-mys: #b59de8; --k-phil: #82b4e8; --k-psy: #7dcaa2;
+  --tip-bg: #e6e9ee; --tip-ink: #141920; --tip-muted: #4f5a6a;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 16px/1.5 var(--body);
+  padding-block: 28px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+header.top { display: grid; gap: 14px; max-width: 70ch; margin-bottom: 20px; }
+h1 {
+  font: 400 clamp(30px, 4.4vw, 46px)/1.05 var(--display);
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+.lead { margin: 0; color: var(--muted); font-size: 17px; max-width: 65ch; }
+
+.filters { display: grid; gap: 8px; margin-bottom: 14px; }
+.frow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.frow > span:first-child {
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+  min-width: 52px;
+}
+.chip {
+  font: 500 14px/1 var(--body);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.chip:hover { border-color: var(--line-strong); }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.chip:focus-visible, .ph:focus-visible, .ax:focus-visible, .ch:focus-visible { outline: 2px solid var(--sun); outline-offset: 2px; }
+.count { font-size: 13px; color: var(--muted); margin-left: 4px; }
+
+.sq { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex: none; }
+.k-rel { background: var(--k-rel); }
+.k-mys { background: var(--k-mys); }
+.k-phil { background: var(--k-phil); }
+.k-psy { background: var(--k-psy); }
+
+/* the chart */
+.scroll {
+  overflow: auto;
+  max-height: calc(100dvh - 24px);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+  overscroll-behavior-x: contain;
+}
+.grid {
+  display: grid;
+  grid-template-columns: var(--axis) repeat(var(--n), var(--col));
+  grid-template-rows: 28px auto repeat(9, minmax(var(--row), auto));
+  width: max-content;
+  position: relative;
+}
+.corner {
+  grid-row: 1 / 3; grid-column: 1;
+  position: sticky; top: 0; left: 0; z-index: 5;
+  background: var(--surface-2);
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 10px;
+  font-size: 12px; line-height: 1.25; color: var(--muted);
+}
+.corner b { font: 400 13px/1.2 var(--display); color: var(--ink); letter-spacing: 0.03em; }
+.grp {
+  grid-row: 1;
+  position: sticky; top: 0; z-index: 4;
+  background: var(--surface-2);
+  border-left: 1px solid var(--line-strong);
+  display: flex; align-items: center;
+}
+.grp span {
+  position: sticky; left: calc(var(--axis) + 10px);
+  padding: 0 10px;
+  font: 400 13px/1 var(--display); letter-spacing: 0.06em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.ch {
+  grid-row: 2;
+  position: sticky; top: 28px; z-index: 4;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  padding: 8px 10px 10px;
+  display: flex; flex-direction: column; gap: 2px;
+  text-align: left; font: inherit; color: inherit; border-top: 0; border-right: 0; border-left: 0;
+  cursor: help;
+}
+.ch.gstart { border-left: 1px solid var(--line-strong); }
+.ch-k { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ch-n { font-weight: 700; font-size: 14.5px; line-height: 1.15; }
+.ch-f { font-style: italic; font-size: 13px; line-height: 1.2; color: var(--muted); }
+
+.ax {
+  grid-column: 1;
+  position: sticky; left: 0; z-index: 3;
+  background: color-mix(in oklab, var(--low), var(--high) calc(var(--t) * 100%));
+  border-right: 1px solid var(--line);
+  border-top: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
+  padding: 8px 10px;
+  text-align: left; font: inherit; color: inherit; border-left: 0; border-bottom: 0;
+  display: flex; flex-direction: column; justify-content: center; gap: 2px;
+  cursor: help;
+}
+.ax b { font: 400 14px/1.15 var(--display); letter-spacing: 0.02em; }
+.ax small { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.stripe {
+  grid-column: 2 / -1; z-index: 0;
+  background: color-mix(in oklab, var(--low), var(--high) calc(var(--t) * 100%));
+  border-top: 1px solid color-mix(in oklab, var(--line) 60%, transparent);
+}
+.divider { grid-row: 3 / -1; z-index: 1; border-left: 1px solid var(--line-strong); pointer-events: none; }
+.cell { z-index: 2; padding: 5px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.ph {
+  flex: 1 1 auto;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px;
+  width: 100%; min-height: 30px;
+  padding: 6px 8px;
+  font: 500 13px/1.2 var(--body);
+  color: var(--ink);
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: help;
+  overflow-wrap: anywhere;
+}
+.ph:hover { border-color: var(--line-strong); }
+.ph-o { font: 400 12px/1.25 var(--body); color: var(--muted); }
+.ph.summit {
+  background: color-mix(in oklab, var(--surface), var(--sun) 14%);
+  border-color: var(--sun);
+  box-shadow: inset 0 0 0 1px var(--sun);
+}
+.empty { padding: 28px 16px; color: var(--muted); }
+
+#tip {
+  position: fixed; z-index: 20;
+  max-width: 280px;
+  background: var(--tip-bg); color: var(--tip-ink);
+  border-radius: 8px;
+  padding: 10px 12px 11px;
+  box-shadow: 0 6px 24px rgba(10, 14, 22, 0.28);
+  pointer-events: none;
+  font-size: 14px; line-height: 1.4;
+}
+#tip .tk { font-size: 11.5px; letter-spacing: 0.04em; color: var(--tip-muted); margin-bottom: 2px; }
+#tip .tt { font-weight: 700; margin-bottom: 3px; }
+#tip .to { margin-bottom: 1px; }
+#tip .tg { font-size: 12.5px; color: var(--tip-muted); margin-bottom: 4px; }
+
+.notes { max-width: 70ch; margin-top: 22px; display: grid; gap: 8px; color: var(--muted); font-size: 14.5px; }
+.notes p { margin: 0; }
+.notes b { color: var(--ink); font-weight: 500; }
+
+@media (max-width: 600px) {
+  :root { --axis: 80px; --col: 114px; --row: 60px; }
+  .ax b { font-size: 12.5px; }
+  .ph { font-size: 12.5px; padding: 5px 6px; }
+  .frow > span:first-child { min-width: 100%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chip, .ph { transition: border-color 120ms ease, background-color 120ms ease; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>Ladders of Awakening</h1>
+  <p class="lead">Forty-three maps of the path, East and West: religious, mystical, philosophical and psychological. Each column climbs from the bottom. Phases at the same height are alike in kind, and the outlined phase is where that map ends. Under each phase is the tradition’s own term, where it has one. Rest on a phase, or tap it, for a short description.</p>
+</header>
+
+<div class="filters" aria-label="Filter the maps">
+  <div class="frow" id="fam"><span>Family</span></div>
+  <div class="frow" id="kind"><span>Kind</span></div>
+</div>
+
+<div class="scroll" id="scroll">
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="notes">
+  <p><b>How to read the heights.</b> They are a reading for comparison, not a claim that the traditions agree. Some maps begin high (the Buddhist stages start with a first awakening) and some end lower (Aristotle’s summit is contemplation, not union).</p>
+  <p><b>Not shown.</b> Shinto and the Akan tradition of Ghana have no widely used staged map of the path, so they have no column.</p>
+  <p><b>Original terms.</b> Greek, Chinese and Japanese are given in their own script, with the romanisation of Chinese and Japanese on hover. Latin, Sanskrit, Pali, Arabic, Persian, Hebrew, Punjabi, Tibetan and Avestan terms are transliterated, with the original script on hover where it has one.</p>
+  <p><b>Sources.</b> Rest on a column’s name to see its source and its title in the original. Drafted from the primary texts and standard accounts, for discussion; corrections are welcome.</p>
+</div>
+
+<div id="tip" role="tooltip" hidden><div class="tk"></div><div class="tt"></div><div class="to"></div><div class="tg"></div><div class="td"></div></div>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  var grid = document.getElementById('grid');
+  var scroll = document.getElementById('scroll');
+  var tip = document.getElementById('tip');
+  var state = { fam: 'all', kind: 'all' };
+  var tips = [];
+  var current = null;
+
+  var famLabel = {}; FAMILIES.forEach(function (f) { famLabel[f[0]] = f[1]; });
+  var kindLabel = {}; KINDS.forEach(function (k) { kindLabel[k[0]] = k[1]; });
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function rowFor(b) { return 3 + (9 - b); }
+  function addTip(node, k, t, d, o, og, lang) {
+    node.dataset.i = tips.length;
+    tips.push({ k: k, t: t, d: d, o: o || '', og: og || '', lang: lang || '' });
+  }
+
+  /* filter chips */
+  function chips(holder, list, key, labelAll) {
+    var all = [['all', labelAll]].concat(list);
+    all.forEach(function (it) {
+      var b = el('button', 'chip');
+      b.type = 'button';
+      b.id = key + '-' + it[0];
+      if (key === 'kind' && it[0] !== 'all') b.appendChild(el('i', 'sq k-' + it[0]));
+      b.appendChild(document.createTextNode(it[1]));
+      b.setAttribute('aria-pressed', state[key] === it[0] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        state[key] = it[0];
+        holder.querySelectorAll('.chip').forEach(function (c) {
+          c.setAttribute('aria-pressed', c === b ? 'true' : 'false');
+        });
+        render();
+      });
+      holder.appendChild(b);
+    });
+  }
+  chips(document.getElementById('fam'), FAMILIES, 'fam', 'All');
+  chips(document.getElementById('kind'), KINDS, 'kind', 'All');
+  var count = el('span', 'count');
+  document.getElementById('kind').appendChild(count);
+
+  function render() {
+    hide();
+    tips = [];
+    grid.textContent = '';
+    var cols = COLS.filter(function (c) {
+      return (state.fam === 'all' || c.g === state.fam) && (state.kind === 'all' || c.k === state.kind);
+    });
+    count.textContent = cols.length === 1 ? '1 map' : cols.length + ' maps';
+    grid.style.setProperty('--n', Math.max(cols.length, 1));
+    if (!cols.length) {
+      var none = el('div', 'empty', 'No map matches both filters. Choose another family or kind.');
+      none.style.gridColumn = '1 / -1';
+      grid.appendChild(none);
+      return;
+    }
+
+    var corner = el('div', 'corner');
+    corner.appendChild(el('b', null, '↑ Nearer awakening'));
+    corner.appendChild(el('span', null, 'Bottom: ordinary life'));
+    grid.appendChild(corner);
+
+    /* family bands across the top, and dividers between families */
+    var start = 0;
+    for (var i = 1; i <= cols.length; i++) {
+      if (i === cols.length || cols[i].g !== cols[start].g) {
+        var g = el('div', 'grp');
+        g.style.gridColumn = (start + 2) + ' / ' + (i + 2);
+        g.appendChild(el('span', null, famLabel[cols[start].g]));
+        grid.appendChild(g);
+        if (start > 0) {
+          var dv = el('div', 'divider');
+          dv.style.gridColumn = String(start + 2);
+          grid.appendChild(dv);
+        }
+        start = i;
+      }
+    }
+
+    /* the axis and the shaded bands */
+    for (var b = 9; b >= 1; b--) {
+      var t = String((b - 1) / 8);
+      var ax = el('button', 'ax');
+      ax.type = 'button';
+      ax.style.gridRow = String(rowFor(b));
+      ax.style.setProperty('--t', t);
+      ax.appendChild(el('small', null, String(b)));
+      ax.appendChild(el('b', null, BANDS[b][0]));
+      addTip(ax, 'Height ' + b + ' of 9', BANDS[b][0], BANDS[b][1]);
+      grid.appendChild(ax);
+      var st = el('div', 'stripe');
+      st.style.gridRow = String(rowFor(b));
+      st.style.setProperty('--t', t);
+      grid.appendChild(st);
+    }
+
+    /* the columns */
+    cols.forEach(function (c, ci) {
+      var col = ci + 2;
+      var label = c.n + ' · ' + c.f;
+      var h = el('button', 'ch' + (ci > 0 && cols[ci - 1].g !== c.g ? ' gstart' : ''));
+      h.type = 'button';
+      h.style.gridColumn = String(col);
+      var k = el('div', 'ch-k');
+      k.appendChild(el('i', 'sq k-' + c.k));
+      k.appendChild(document.createTextNode(c.d));
+      h.appendChild(k);
+      h.appendChild(el('div', 'ch-n', c.n));
+      h.appendChild(el('div', 'ch-f', c.f));
+      addTip(h, famLabel[c.g] + ' · ' + kindLabel[c.k], label, c.s, c.o, '', c.l);
+      grid.appendChild(h);
+
+      var groups = [];
+      c.p.forEach(function (p, pi) {
+        var last = groups[groups.length - 1];
+        if (last && last.a === p[2] && last.b === p[3]) last.items.push([p, pi]);
+        else groups.push({ a: p[2], b: p[3], items: [[p, pi]] });
+      });
+      groups.forEach(function (gr) {
+        var cell = el('div', 'cell');
+        cell.style.gridColumn = String(col);
+        cell.style.gridRow = rowFor(gr.b) + ' / ' + (rowFor(gr.a) + 1);
+        gr.items.forEach(function (pair) {
+          var p = pair[0];
+          var btn = el('button', 'ph' + (pair[1] === c.p.length - 1 ? ' summit' : ''));
+          btn.type = 'button';
+          btn.appendChild(el('span', 'ph-t', p[0]));
+          if (p[4]) {
+            var term = el('span', 'ph-o', p[4]);
+            if (c.l) term.lang = c.l;
+            btn.appendChild(term);
+          }
+          var hint = p[2] === p[3] ? 'Height ' + p[2] : 'Heights ' + p[2] + '–' + p[3];
+          addTip(btn, label + ' · ' + hint, p[0], p[1], p[4], p[5], c.l);
+          cell.appendChild(btn);
+        });
+        grid.appendChild(cell);
+      });
+    });
+  }
+
+  /* the description bubble */
+  function show(node) {
+    var d = tips[+node.dataset.i];
+    if (!d) return;
+    current = node;
+    tip.querySelector('.tk').textContent = d.k;
+    tip.querySelector('.tt').textContent = d.t;
+    var to = tip.querySelector('.to'), tg = tip.querySelector('.tg');
+    to.textContent = d.o; to.hidden = !d.o; to.lang = d.lang;
+    tg.textContent = d.og; tg.hidden = !d.og;
+    tip.querySelector('.td').textContent = d.d;
+    tip.hidden = false;
+    var r = node.getBoundingClientRect();
+    var w = tip.offsetWidth, hgt = tip.offsetHeight;
+    var left = Math.min(Math.max(r.left + r.width / 2 - w / 2, 8), window.innerWidth - w - 8);
+    var top = r.bottom + 8;
+    if (top + hgt > window.innerHeight - 8) top = Math.max(8, r.top - hgt - 8);
+    tip.style.left = left + 'px';
+    tip.style.top = top + 'px';
+  }
+  function hide() { tip.hidden = true; current = null; }
+
+  grid.addEventListener('pointerover', function (e) {
+    if (e.pointerType === 'touch') return;
+    var n = e.target.closest('[data-i]');
+    if (n && n !== current) show(n);
+  });
+  grid.addEventListener('pointerout', function (e) {
+    if (e.pointerType === 'touch') return;
+    var n = e.target.closest('[data-i]');
+    if (n && !(e.relatedTarget && n.contains(e.relatedTarget))) hide();
+  });
+  grid.addEventListener('focusin', function (e) {
+    var n = e.target.closest('[data-i]');
+    if (n) show(n);
+  });
+  grid.addEventListener('focusout', hide);
+  /* a tap toggles; a mouse already shows it on hover and a key on focus */
+  var lastType = '', wasShown = false;
+  grid.addEventListener('pointerdown', function (e) {
+    lastType = e.pointerType;
+    var n = e.target.closest('[data-i]');
+    wasShown = !!n && current === n && !tip.hidden;
+  });
+  grid.addEventListener('click', function (e) {
+    var n = e.target.closest('[data-i]');
+    if (!n || lastType !== 'touch') return;
+    if (wasShown) hide(); else show(n);
+  });
+  document.addEventListener('click', function (e) { if (!grid.contains(e.target)) hide(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') hide(); });
+  scroll.addEventListener('scroll', hide, { passive: true });
+  window.addEventListener('resize', hide);
+
+  render();
+})();
+</script>
+</body>
+</html>
