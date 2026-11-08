@@ -38,7 +38,7 @@ var COLS = [
   { g: 'greek', k: 'rel', d: 'c. 400 BCE', n: 'Orphic', f: 'The gold tablets', l: 'grc',
     s: 'Grave tablets from Hipponion, Petelia, Thurii and Pelinna: the soul’s road after death',
     p: [
-      ['The spring of forgetting', 'By the white cypress, the first spring: the soul that drinks here forgets, and is born again.', 1, 1, 'λευκὴ κυπάρισσος', 'the white cypress that marks the spring; later called Λήθη, forgetting'],
+      ['The first spring', 'By the white cypress the souls of the dead stop to drink; the initiate is told to pass it by.', 1, 1, 'λευκὴ κυπάρισσος', 'the white cypress that marks the spring; later readers call it Λήθη, forgetting'],
       ['Parched with thirst', 'The soul cries that it is dry and perishing: the longing that drives it on.', 2, 2, 'δίψα', '“δίψῃ δ’ εἰμὶ αὖος καὶ ἀπόλλυμαι”: I am dry with thirst and perishing'],
       ['Child of Earth and starry Heaven', 'Before the guardians it says who it truly is: earthly in body, heavenly by race.', 5, 5, 'Γῆς παῖς εἰμι καὶ Οὐρανοῦ ἀστερόεντος'],
       ['The lake of Memory', 'It drinks from the lake of Mnemosyne and remembers where it came from.', 6, 6, 'Μνημοσύνης λίμνη'],
@@ -49,7 +49,7 @@ var COLS = [
     s: 'Iamblichus, Life of Pythagoras; Aulus Gellius, Attic Nights 1.9 (both written centuries later)',
     p: [
       ['Tested at the door', 'Pythagoras read a candidate’s face, gait and laughter before letting them in.', 2, 2, 'φυσιογνωμονία', 'reading character from the face and body'],
-      ['The hearers', 'Up to five years of silence, listening to the sayings from behind a curtain.', 3, 3, 'ἀκουσματικοί', 'the silence was ἐχεμυθία; Gellius calls them ἀκουστικοί'],
+      ['The hearers', 'At least two years of silent listening, says Gellius; five, says Iamblichus, who adds a curtain.', 3, 3, 'ἀκουστικοί', 'Gellius’s name; the silence was ἐχεμυθία. Iamblichus’s ἀκουσματικοί are a separate group'],
       ['The learners', 'Admitted to number, geometry, music and astronomy: studies that purify the soul.', 4, 5, 'μαθηματικοί'],
       ['Students of nature', 'Those who went on to first principles and the order of the cosmos.', 6, 6, 'φυσικοί'],
       ['Follow the god', 'The aim of the whole life: to become like the divine.', 8, 9, 'ἕπου θεῷ']
@@ -111,11 +111,11 @@ var COLS = [
     ] },
 
   /* ---------------- Abrahamic & Persian ---------------- */
-  { g: 'abrahamic', k: 'rel', d: 'texts c. 300–900 CE', n: 'Zoroastrian', f: 'The soul’s ascent',
-    s: 'Hadokht Nask; the Book of Arda Viraf: the soul’s road after death',
+  { g: 'abrahamic', k: 'rel', d: 'Avestan; Arda Viraf c. 900 CE', n: 'Zoroastrian', f: 'The soul’s ascent',
+    s: 'Hadokht Nask (the four steps); the Book of Arda Viraf (the star, moon and sun stations): the soul’s road after death',
     p: [
-      ['Meeting one’s conscience', 'At dawn on the fourth day the soul meets its conscience as a radiant maiden: “I am your own good thoughts, words and deeds.”', 3, 3, 'daēnā', 'Avestan; Middle Persian dēn'],
-      ['The Chinvat Bridge', 'The bridge of the separator: broad for the righteous, a blade’s edge for the wicked.', 4, 4, 'Cinuuatō pərətu', 'Avestan; Middle Persian Čēnwad puhl'],
+      ['Meeting one’s conscience', 'At dawn after the third night the soul meets a radiant maiden: its own conscience, made lovely by its good thoughts, words and deeds.', 3, 3, 'daēnā', 'Avestan; Middle Persian dēn'],
+      ['The Chinvat Bridge', 'The bridge traditionally called the separator’s: broad for the righteous, a blade’s edge for the wicked.', 4, 4, 'činuuatō pərətu', 'Avestan; Middle Persian Činwad puhl'],
       ['Station of the stars', 'First step: the place of good thoughts.', 5, 5, 'humata', 'good thought; Middle Persian humat'],
       ['Station of the moon', 'Second step: the place of good words.', 6, 6, 'hūxta', 'good word; Middle Persian hūxt'],
       ['Station of the sun', 'Third step: the place of good deeds.', 7, 7, 'hvaršta', 'good deed; Middle Persian huwaršt'],
@@ -139,7 +139,7 @@ var COLS = [
     p: [
       ['Purification', 'Repentance, ascetic struggle and the stilling of the passions.', 3, 4, 'κάθαρσις', 'Latin via purgativa'],
       ['Illumination', 'The cleansed mind is lit by God; contemplation of creation and Scripture.', 5, 6, 'φωτισμός', 'Latin via illuminativa'],
-      ['Deification', 'Union with God, becoming by grace what God is by nature.', 8, 9, 'θέωσις', 'Latin via unitiva']
+      ['Deification', 'Union with God, becoming by grace what God is by nature.', 8, 9, 'τελείωσις', 'perfection; its goal is θέωσις, deification; Latin via unitiva']
     ] },
   { g: 'abrahamic', k: 'mys', d: '1577', n: 'Christian', f: 'Teresa’s Interior Castle', l: 'es',
     o: 'Las moradas del castillo interior', s: 'Teresa of Ávila, The Interior Castle: seven dwelling places',
@@ -156,7 +156,7 @@ var COLS = [
   { g: 'abrahamic', k: 'rel', d: '7th c. CE', n: 'Islam', f: 'The three states of the self',
     o: 'al-nafs · النفس', s: 'The Qur’an 12:53, 75:2 and 89:27–30',
     p: [
-      ['The commanding self', 'The self that urges towards evil.', 1, 1, 'al-nafs al-ammāra', 'النفس الأمارة (12:53)'],
+      ['The commanding self', 'The self that urges towards evil.', 1, 1, 'al-nafs al-ammāra', 'النفس الأمارة; from 12:53, إن النفس لأمارة بالسوء'],
       ['The reproaching self', 'Conscience wakes, and the self blames itself and struggles: the greater jihad, al-jihād al-akbar.', 2, 4, 'al-nafs al-lawwāma', 'النفس اللوامة (75:2)'],
       ['The self at peace', '“O soul at peace, return to your Lord, well pleased and well pleasing.”', 5, 8, 'al-nafs al-muṭmaʾinna', 'النفس المطمئنة (89:27)']
     ] },
@@ -186,12 +186,12 @@ var COLS = [
       ['Arahant', 'All fetters cut, even conceit and restlessness: “done is what had to be done”.', 8, 9, 'arahant', '“kataṃ karaṇīyaṃ”']
     ] },
   { g: 'indian', k: 'rel', d: 'c. 200 BCE–200 CE', n: 'Hindu', f: 'The four stages of life',
-    o: 'āśrama · आश्रम', s: 'The Dharmashastras, above all the Laws of Manu, chapters 2–6',
+    o: 'āśrama · आश्रम', s: 'The Dharmashastras, above all the Laws of Manu, chapters 2–6 (a scheme for twice-born men)',
     p: [
       ['Student', 'Celibate study of the Veda in a teacher’s house.', 3, 3, 'brahmacarya', 'ब्रह्मचर्य'],
       ['Householder', 'Family, work, duty and giving: living the aims of dharma, wealth and pleasure well.', 4, 4, 'gṛhastha', 'गृहस्थ; the aims are dharma, artha and kāma'],
       ['Forest-dweller', 'Handing on the household and withdrawing into simplicity and contemplation.', 5, 6, 'vānaprastha', 'वानप्रस्थ'],
-      ['Renunciant', 'Giving up home, name and possessions, wandering, seeking only liberation.', 7, 7, 'saṃnyāsa', 'संन्यास'],
+      ['Renunciant', 'Giving up home, the household fire and possessions; wandering alone, seeking only liberation.', 7, 7, 'saṃnyāsa', 'संन्यास'],
       ['Liberation', 'Release from the round of rebirth: the fourth and highest aim of life.', 8, 9, 'mokṣa', 'मोक्ष']
     ] },
   { g: 'indian', k: 'rel', d: 'c. 2nd–5th c. CE', n: 'Jain', f: 'The fourteen stages',
@@ -222,7 +222,7 @@ var COLS = [
       ['Isolation', 'Pure awareness stands alone, free of nature’s play: liberation.', 8, 9, 'kaivalya', 'कैवल्य']
     ] },
   { g: 'indian', k: 'mys', d: 'c. 700 CE', n: 'Advaita Vedanta', f: 'The path of knowledge',
-    o: 'jñāna-mārga', s: 'Shankara and the Advaita tradition (Vivekachudamani)',
+    o: 'jñāna-mārga', s: 'Shankara, commentary on the Brahma Sutra 1.1.1; the Vivekachudamani, traditionally attributed to him',
     p: [
       ['Discrimination', 'Telling the eternal from the passing.', 2, 2, 'viveka', 'विवेक'],
       ['Dispassion', 'Losing the taste for the fruits of action, here or in heaven.', 3, 3, 'vairāgya', 'वैराग्य'],
@@ -247,20 +247,20 @@ var COLS = [
     p: [
       ['Realm of duty', 'The earth as the place to practise righteousness; each judged by their deeds.', 3, 3, 'Dharam Khand', 'ਧਰਮ ਖੰਡ'],
       ['Realm of knowledge', 'Knowledge blazes, and the seeker sees creation’s countless worlds.', 4, 5, 'Gian Khand', 'ਗਿਆਨ ਖੰਡ'],
-      ['Realm of effort', 'Spiritual effort shapes mind and intellect with beauty.', 6, 6, 'Saram Khand', 'ਸਰਮ ਖੰਡ'],
-      ['Realm of grace', 'Grace and power fill the devoted; nothing else remains.', 7, 7, 'Karam Khand', 'ਕਰਮ ਖੰਡ'],
+      ['Realm of effort', 'Spiritual effort shapes mind and intellect with beauty.', 6, 6, 'Saram Khand', 'ਸਰਮ ਖੰਡ; saram read as effort or as humility'],
+      ['Realm of grace', 'Its speech is power; only the mighty, filled with the Lord, dwell there.', 7, 7, 'Karam Khand', 'ਕਰਮ ਖੰਡ'],
       ['Realm of truth', 'Where the Formless One dwells.', 8, 9, 'Sach Khand', 'ਸਚ ਖੰਡ']
     ] },
-  { g: 'indian', k: 'mys', d: '1577', n: 'Hindu tantra', f: 'The seven chakras',
-    o: 'ṣaṭ-cakra-nirūpaṇa', s: 'Purnananda, Shat-chakra-nirupana (1577)',
+  { g: 'indian', k: 'mys', d: '1577', n: 'Hindu tantra', f: 'The six centres and the crown',
+    o: 'ṣaṭ-cakra-nirūpaṇa, the description of the six centres', s: 'Purnananda, Shat-chakra-nirupana (1577)',
     p: [
       ['Root support', 'At the base of the spine, where the coiled kundalini sleeps.', 1, 1, 'mūlādhāra', 'मूलाधार; the coiled power is kuṇḍalinī'],
-      ['Its own seat', 'Water, and desire.', 2, 2, 'svādhiṣṭhāna', 'स्वाधिष्ठान'],
-      ['City of jewels', 'Fire: will and power.', 3, 4, 'maṇipūra', 'मणिपूर'],
-      ['The unstruck', 'At the heart: air, and the sound no one strikes. Love opens.', 5, 5, 'anāhata', 'अनाहत'],
-      ['The purified', 'At the throat: ether, speech and subtle knowing.', 6, 6, 'viśuddha', 'विशुद्ध'],
-      ['Command', 'Between the eyebrows: the inner eye, mind beyond the senses.', 7, 7, 'ājñā', 'आज्ञा'],
-      ['Thousand-petalled', 'At the crown: kundalini meets Shiva in union.', 8, 9, 'sahasrāra', 'सहस्रार']
+      ['Its own seat', 'Water: a six-petalled lotus at the root of the genitals.', 2, 2, 'svādhiṣṭhāna', 'स्वाधिष्ठान'],
+      ['City of jewels', 'Fire: the ten-petalled lotus at the navel.', 3, 4, 'maṇipūra', 'मणिपूर'],
+      ['The unstruck', 'At the heart: air, and a twelve-petalled lotus where the sound no one strikes is heard.', 5, 5, 'anāhata', 'अनाहत'],
+      ['The purified', 'At the throat: ether, and a lotus of sixteen petals.', 6, 6, 'viśuddha', 'विशुद्ध'],
+      ['Command', 'Between the eyebrows: the two-petalled lotus, seat of the mind.', 7, 7, 'ājñā', 'आज्ञा'],
+      ['Thousand-petalled', 'Above the six centres, at the crown: kundalini meets Shiva in union.', 8, 9, 'sahasrāra', 'सहस्रार']
     ] },
   { g: 'indian', k: 'mys', d: '1939–40', n: 'Sri Aurobindo', f: 'The ascent beyond mind',
     s: 'The Life Divine; Letters on Yoga',
@@ -288,14 +288,15 @@ var COLS = [
   { g: 'chinese', k: 'phil', d: 'c. 300 BCE', n: 'Daoist', f: 'Putting things outside', l: 'zh-Hant',
     o: '莊子 Zhuāngzǐ', s: 'Zhuangzi, chapter 6',
     p: [
-      ['The world outside', 'After three days of guarding, the world no longer holds him.', 4, 4, '外天下', 'wài tiānxià'],
-      ['Things outside', 'After seven more, things themselves let go of him.', 5, 5, '外物', 'wài wù'],
-      ['Life outside', 'After nine more, even clinging to life falls away.', 6, 7, '外生', 'wài shēng'],
-      ['Dawn, and the One', 'Then a clarity like dawn, and he sees the One, alone.', 8, 8, '朝徹 · 見獨', 'zhāochè, jiàn dú'],
-      ['Calm in the turmoil', 'No past or present, no birth or death: peace in the midst of everything.', 9, 9, '攖寧', 'yīngníng; before it, 無古今 and 不死不生']
+      ['The world outside', 'After three days of teaching, he could put the world outside himself.', 4, 4, '外天下', 'wài tiānxià'],
+      ['Things outside', 'After seven more days, he could put things outside himself.', 5, 5, '外物', 'wài wù'],
+      ['Life outside', 'After nine more, he could put life itself outside him.', 6, 7, '外生', 'wài shēng'],
+      ['Dawn, and aloneness', 'Then a clarity like dawn, and he could see his own aloneness: what stands alone.', 8, 8, '朝徹 · 見獨', 'zhāochè, jiàn dú'],
+      ['No past, no death', 'Past and present fall away; he enters where there is no life and no death.', 8, 8, '無古今 · 不死不生', 'wú gǔjīn, bù sǐ bù shēng'],
+      ['Peace in strife', 'Sending off and welcoming, destroying and completing all things, yet at peace.', 9, 9, '攖寧', 'yīngníng, “Peace-in-Strife” in Watson’s translation']
     ] },
   { g: 'chinese', k: 'mys', d: 'c. 1000 CE', n: 'Daoist', f: 'Inner alchemy', l: 'zh-Hant',
-    o: '內丹 nèidān', s: 'Neidan, from Zhang Boduan onwards',
+    o: '內丹 nèidān', s: 'The Zhong-Lü tradition, and Zhang Boduan, Awakening to Reality (1075)',
     p: [
       ['Laying the foundation', 'Calming, healing and gathering the body’s energies before the real work.', 3, 3, '築基', 'zhùjī'],
       ['Essence into breath', 'Refining vital essence into living energy.', 4, 4, '煉精化氣', 'liàn jīng huà qì'],
@@ -362,13 +363,13 @@ var COLS = [
       ['Denial of the will', 'The will turns and gives itself up: the saint’s deep calm.', 7, 8, 'Verneinung des Willens', 'Verneinung des Willens zum Leben']
     ] },
   { g: 'modern', k: 'phil', d: '1843–46', n: 'Kierkegaard', f: 'Stages on life’s way', l: 'da',
-    o: 'Stadier paa Livets Vei', s: 'Either/Or; Fear and Trembling; Concluding Unscientific Postscript',
+    o: 'Stadier paa Livets Vei', s: 'Either/Or (1843); Fear and Trembling (1843); Stages on Life’s Way (1845); Concluding Unscientific Postscript (1846)',
     p: [
-      ['The aesthetic', 'Living for pleasure and the interesting, from moment to moment.', 1, 1, 'det æstetiske'],
+      ['The aesthetic', 'Living for pleasure and the interesting, from moment to moment.', 1, 1, 'det Æsthetiske'],
       ['Despair', 'Boredom and despair force the either/or: choose yourself.', 2, 2, 'Fortvivlelse', 'Enten – Eller, either/or'],
-      ['The ethical', 'Commitment, duty, and choosing oneself among others.', 3, 4, 'det etiske'],
-      ['Infinite resignation', 'Inward religiousness: giving up the finite world for the eternal.', 5, 7, 'den uendelige Resignation', 'Religiøsitet A, religiousness A'],
-      ['Faith', 'The leap: receiving the finite back by virtue of the absurd, at home in ordinary life.', 8, 9, 'Troen', '“i Kraft af det Absurde”; Religiøsitet B']
+      ['The ethical', 'Commitment, duty, and choosing oneself among others.', 3, 4, 'det Ethiske'],
+      ['Infinite resignation', 'Inward religiousness: giving up the finite world for the eternal.', 5, 7, 'den uendelige Resignation', 'Religieusitet A, religiousness A'],
+      ['Faith', 'The leap: receiving the finite back by virtue of the absurd, at home in ordinary life.', 8, 9, 'Troen', '“i Kraft af det Absurde”; Religieusitet B']
     ] },
   { g: 'modern', k: 'phil', d: '1883', n: 'Nietzsche', f: 'The three metamorphoses', l: 'de',
     o: 'Von den drei Verwandlungen', s: 'Thus Spoke Zarathustra, part I',
@@ -443,8 +444,8 @@ var COLS = [
       ['Conjunctive', 'Holding paradox: a second naïveté that hears truth in other traditions.', 5, 6],
       ['Universalising', 'Rare: living from the unity of all beings, selflessly and often at a cost.', 8, 9]
     ] },
-  { g: 'modern', k: 'psy', d: '1999', n: 'Susanne Cook-Greuter', f: 'Ego development',
-    s: 'After Jane Loevinger; Postautonomous Ego Development (1999)',
+  { g: 'modern', k: 'psy', d: '1999–2013', n: 'Susanne Cook-Greuter', f: 'Ego development',
+    s: 'After Jane Loevinger; Postautonomous Ego Development (1999); Nine Levels of Increasing Embrace (2013)',
     p: [
       ['Self-protective', 'Out for oneself: others are a means or a threat.', 1, 1],
       ['Conformist', 'Belonging comes first: the group decides what is right.', 1, 1],
