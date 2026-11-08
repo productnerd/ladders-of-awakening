@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0d1016">
 <meta name="description" content="Forty-three staged maps of the path to awakening, East and West, religious to secular, side by side on one scale, with each tradition’s own terms.">
 <title>Ladders of Awakening</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,44 +15,30 @@
    one column per map, sticky axis on the left and sticky headers on top. */
 *, *::before, *::after { box-sizing: border-box; }
 [hidden] { display: none !important; }
+/* Dark only (Maria, 8 November 2026): the night sky over the cave, warming to gold near the top. */
 :root {
-  --bg: #eef1f4;
-  --surface: #fbfcfd;
-  --surface-2: #f5f7f9;
-  --ink: #1b2230;
-  --muted: #5a6474;
-  --line: #d3d9e1;
-  --line-strong: #a9b3c1;
-  --low: #c9d0da;
-  --high: #f6e4ab;
-  --sun: #b07f12;
-  --k-rel: #9a3f2c;
-  --k-mys: #6b4aa0;
-  --k-phil: #2c5f8f;
-  --k-psy: #2f7a55;
-  --tip-bg: #1b2230;
-  --tip-ink: #eef1f4;
-  --tip-muted: #aab4c3;
+  --bg: #0d1016;
+  --surface: #1a2029;
+  --surface-2: #141920;
+  --ink: #e6e9ee;
+  --muted: #9aa4b3;
+  --line: #2a313d;
+  --line-strong: #4a5464;
+  --low: #0f131a;
+  --high: #3d3420;
+  --sun: #e2b24c;
+  --k-rel: #e58d76;
+  --k-mys: #b59de8;
+  --k-phil: #82b4e8;
+  --k-psy: #7dcaa2;
+  --tip-bg: #e6e9ee;
+  --tip-ink: #141920;
+  --tip-muted: #4f5a6a;
   --display: "Marcellus", "Trajan Pro", Georgia, serif;
   --body: "Alegreya Sans", "Gill Sans", "Segoe UI", system-ui, sans-serif;
   --axis: 112px;
   --col: 128px;
   --row: 66px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0d1016; --surface: #1a2029; --surface-2: #141920; --ink: #e6e9ee; --muted: #9aa4b3;
-    --line: #2a313d; --line-strong: #4a5464; --low: #0f131a; --high: #3d3420; --sun: #e2b24c;
-    --k-rel: #e58d76; --k-mys: #b59de8; --k-phil: #82b4e8; --k-psy: #7dcaa2;
-    --tip-bg: #e6e9ee; --tip-ink: #141920; --tip-muted: #4f5a6a;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0d1016; --surface: #1a2029; --surface-2: #141920; --ink: #e6e9ee; --muted: #9aa4b3;
-  --line: #2a313d; --line-strong: #4a5464; --low: #0f131a; --high: #3d3420; --sun: #e2b24c;
-  --k-rel: #e58d76; --k-mys: #b59de8; --k-phil: #82b4e8; --k-psy: #7dcaa2;
-  --tip-bg: #e6e9ee; --tip-ink: #141920; --tip-muted: #4f5a6a;
   color-scheme: dark;
 }
 
